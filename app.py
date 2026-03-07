@@ -399,7 +399,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     # ===== PAGE 4: LAB RESULTS =====
     doc.add_page_break()
     
-    lab_title = doc.add_paragraph()
+    lab_title = make_tight(doc.add_paragraph())
     run = lab_title.add_run("Laboratory Results Analysis")
     run.font.name = 'Bebas Neue'
     run.bold = True
@@ -447,7 +447,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     doc.add_paragraph()
     
     # Surface Sample Table
-    surface_title = doc.add_paragraph()
+    surface_title = make_tight(doc.add_paragraph())
     run = surface_title.add_run("Surface Sample Results (Swab)")
     run.font.name = 'Bebas Neue'
     run.bold = True
@@ -477,7 +477,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     
     # Mold Types section
     doc.add_paragraph()
-    mold_title = doc.add_paragraph()
+    mold_title = make_tight(doc.add_paragraph())
     run = mold_title.add_run("Mold Types Identified")
     run.font.name = 'Bebas Neue'
     run.bold = True
