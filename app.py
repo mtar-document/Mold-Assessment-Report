@@ -184,9 +184,9 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     doc.add_paragraph()
     title = doc.add_paragraph()
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    contact.paragraph_format.space_before = Pt(0)
-    contact.paragraph_format.space_after = Pt(0)
-    contact.paragraph_format.line_spacing = 1.0
+    title.paragraph_format.space_before = Pt(0)
+    title.paragraph_format.space_after = Pt(0)
+    title.paragraph_format.line_spacing = 1.0
     run = title.add_run("MOLD ASSESSMENT REPORT")
     run.font.name = 'Bebas Neue'
     run.bold = True
