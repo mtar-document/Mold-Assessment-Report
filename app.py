@@ -306,7 +306,6 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
             run.bold = True
         
         # Official notification
-        make_tight(doc.add_paragraph())
         notification = make_tight(doc.add_paragraph())
         run = notification.add_run(
             "This letter serves as official notification that professional mold remediation is required to return "
@@ -328,9 +327,8 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
         ))
     
     # Signature
-    make_tight(doc.add_paragraph())
-    doc.add_paragraph("Sincerely,")
     doc.add_paragraph()
+    make_tight(doc.add_paragraph("Sincerely,"))
     sig = make_tight(doc.add_paragraph())
     run = sig.add_run("Azeem Iqbal")
     run.bold = True
