@@ -257,7 +257,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     # ===== PAGE 2: OFFICIAL LETTER =====    
     doc.add_page_break()
     
-    letter_header = doc.add_paragraph()
+    letter_header = make_tight(doc.add_paragraph())
     run = letter_header.add_run("State Licensed Mold Assessment Consultant:\n")
     run.bold = True
     letter_header.add_run("Azeem Iqbal — TDLR MAC #2189\n\n")
@@ -265,7 +265,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     run.bold = True
     letter_header.add_run(data['report_date'].strftime("%B %d, %Y"))
     
-    doc.add_paragraph()
+    make_tight(doc.add_paragraph())
     doc.add_paragraph("To whom it may concern,")
     
     # Introduction paragraphs
@@ -306,8 +306,8 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
             run.bold = True
         
         # Official notification
-        doc.add_paragraph()
-        notification = doc.add_paragraph()
+        make_tight(doc.add_paragraph())
+        notification = make_tight(doc.add_paragraph())
         run = notification.add_run(
             "This letter serves as official notification that professional mold remediation is required to return "
             "the property to a normal fungal ecology (Condition 1). The property should be remediated by a State "
@@ -322,21 +322,21 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
         run.italic = True
         results_p.add_run(". The indoor spore counts are within acceptable levels compared to the outdoor control sample.")
         
-        doc.add_paragraph(
+        make_tight(doc.add_paragraph(
             "This letter serves as confirmation that the property's fungal ecology is within normal parameters (Condition 1) "
             "at the time of inspection."
-        )
+        ))
     
     # Signature
-    doc.add_paragraph()
+    make_tight(doc.add_paragraph())
     doc.add_paragraph("Sincerely,")
     doc.add_paragraph()
-    sig = doc.add_paragraph()
+    sig = make_tight(doc.add_paragraph())
     run = sig.add_run("Azeem Iqbal")
     run.bold = True
     run.font.size = Pt(12)
-    doc.add_paragraph("State of Texas Licensed Mold Assessment Consultant")
-    doc.add_paragraph("TDLR MAC #2189 (Exp. 10/24/2027)")
+    make_tight(doc.add_paragraph("State of Texas Licensed Mold Assessment Consultant"))
+    make_tight(doc.add_paragraph("TDLR MAC #2189 (Exp. 10/24/2027)"))
     
     # ===== PAGE 3: VISUAL OBSERVATIONS =====
     doc.add_page_break()
