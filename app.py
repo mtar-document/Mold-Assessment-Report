@@ -174,6 +174,8 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     # Company Header  
     contact = doc.add_paragraph()
     contact.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    contact.paragraph_format.space_after = Pt(0)
+    contact.paragraph_format.line_spacing = 1.0
     contact.add_run("Mold Testing and Removal\n")
     contact.add_run("2031 John West Rd. #119\n")
     contact.add_run("Dallas, TX 75228\n")
@@ -184,10 +186,10 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     doc.add_paragraph()
     title = doc.add_paragraph()
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    title.paragraph_format.space_before = Pt(0)
-    title.paragraph_format.space_after = Pt(0)
-    title.paragraph_format.line_spacing = 1.0
     run = title.add_run("MOLD ASSESSMENT REPORT")
+    run.paragraph_format.space_before = Pt(0)
+    run.paragraph_format.space_after = Pt(0)
+    run.paragraph_format.line_spacing = 1.0
     run.font.name = 'Bebas Neue'
     run.bold = True
     run.font.size = Pt(30)
