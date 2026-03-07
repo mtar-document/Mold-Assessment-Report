@@ -306,7 +306,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
             run.bold = True
         
         # Official notification
-        notification = make_tight(doc.add_paragraph())
+        notification = doc.add_paragraph()
         run = notification.add_run(
             "This letter serves as official notification that professional mold remediation is required to return "
             "the property to a normal fungal ecology (Condition 1). The property should be remediated by a State "
