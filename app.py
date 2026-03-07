@@ -329,6 +329,15 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     # Signature
     doc.add_paragraph()
     make_tight(doc.add_paragraph("Sincerely,"))
+    # Signature picture 'azeem_signature.png'
+    try:
+        # We add it to a tight paragraph to prevent huge gaps
+        sig_para = make_tight(doc.add_paragraph())
+        run = sig_para.add_run()
+        run.add_picture('signature.png')
+    except Exception as e:
+        # This keeps the app from crashing if the image file is missing
+        doc.add_paragraph("[Signature Image Not Found]")
     sig = make_tight(doc.add_paragraph())
     run = sig.add_run("Azeem Iqbal")
     run.bold = True
