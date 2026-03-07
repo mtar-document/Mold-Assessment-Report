@@ -66,8 +66,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Header
-st.markdown('<h1 class="main-header">🏠 Mold Report Generator</h1>', unsafe_allow_html=True)
-st.markdown('<p class="sub-header">Mold Testing and Removal - Automated Report System</p>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-header">🦠 Mold Assessment Report Generator 🦠</h1>', unsafe_allow_html=True)
+st.markdown('<p class="sub-header">Mold Testing and Removal</p>', unsafe_allow_html=True)
 
 # Initialize session state
 if 'lab_results' not in st.session_state:
