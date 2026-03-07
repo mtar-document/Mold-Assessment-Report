@@ -495,11 +495,12 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     # ===== PAGE 5: CONCLUSIONS & RECOMMENDATIONS =====
     doc.add_page_break()
     
-    conc_title = doc.add_paragraph()
+    conc_title = make_tight(doc.add_paragraph())
     run = conc_title.add_run("Conclusions")
+    run.font.name = 'Bebas Neue'
     run.bold = True
-    run.font.size = Pt(16)
     run.font.color.rgb = RGBColor(24, 64, 88)
+    run.font.size = Pt(17)
     
     doc.add_paragraph("Based on the visual inspection, moisture readings, and laboratory results, the following conclusions are made:")
     
@@ -511,11 +512,12 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     
     doc.add_paragraph()
     
-    rec_title = doc.add_paragraph()
+    rec_title = make_tight(doc.add_paragraph())
     run = rec_title.add_run("Recommendations")
+    run.font.name = 'Bebas Neue'
     run.bold = True
-    run.font.size = Pt(16)
     run.font.color.rgb = RGBColor(24, 64, 88)
+    run.font.size = Pt(17)
     
     if lab_results['mold_present']:
         doc.add_paragraph("To return the property to a normal fungal ecology (Condition 1), the following remediation steps are recommended:")
@@ -555,11 +557,12 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     # ===== PAGE 6: TERMS AND CONDITIONS =====
     doc.add_page_break()
     
-    terms_title = doc.add_paragraph()
+    terms_title = make_tight(doc.add_paragraph())
     run = terms_title.add_run("Terms and Conditions")
+    run.font.name = 'Bebas Neue'
     run.bold = True
-    run.font.size = Pt(16)
     run.font.color.rgb = RGBColor(24, 64, 88)
+    run.font.size = Pt(17)
     
     terms = [
         ("Inspection Limitation", "This inspection and the information set forth in the report is provided solely for the purpose of verifying that certain structural or physical characteristics exist at the Location Address listed. The undersigned and company representative does not make a health or safety certification or warranty, express or implied, of any kind."),
@@ -594,10 +597,12 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     footer = doc.add_paragraph()
     footer.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = footer.add_run("Mold Testing and Removal\n")
+    run.font.name = 'Bebas Neue'
     run.bold = True
     run.font.color.rgb = RGBColor(24, 64, 88)
-    footer.add_run("2031 John West Rd, Suite 119 | Dallas, TX 75228\n")
-    footer.add_run("(817) 718-5086 | Azeem@RestorationCleanupService.com")
+    run.font.size = Pt(20)
+    footer.add_run("2031 John West Rd. #119 | Dallas, TX 75228\n")
+    footer.add_run("(817) 718-5086 | help@moldtestingandremoval.com")
     
     # Save Word doc to bytes
     docx_buffer = BytesIO()
