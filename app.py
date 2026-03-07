@@ -171,19 +171,14 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     font.size = Pt(11)
     
     # ===== PAGE 1: COVER PAGE =====
-    # Company Header
-    header = doc.add_paragraph()
-    header.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run = header.add_run("Mold Testing and Removal")
-    run.bold = True
-    run.font.size = Pt(24)
-    run.font.color.rgb = RGBColor(24, 64, 88)
-    
+    # Company Header  
     contact = doc.add_paragraph()
-    contact.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    contact.add_run("2031 John West Rd, Suite 119\n").font.size = Pt(10)
-    contact.add_run("Dallas, TX 75228\n").font.size = Pt(10)
-    contact.add_run("(817) 718-5086 | Azeem@RestorationCleanupService.com").font.size = Pt(10)
+    contact.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    contact.add_run("Mold Testing and Removal\n")
+    contact.add_run("2031 John West Rd. #119\n")
+    contact.add_run("Dallas, TX 75228\n")
+    contact.add_run("(817) 718-5086")
+    contact.add_run("help@moldtestingandremoval.com")
     
     # Title
     doc.add_paragraph()
