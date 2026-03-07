@@ -202,7 +202,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     # Property Photo
     if photos.get('property'):
         try:
-            p = doc.add_paragraph()
+            p = make_tight(doc.add_paragraph())
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
             run = p.add_run()
             run.add_picture(photos['property'], width=Inches(5))
