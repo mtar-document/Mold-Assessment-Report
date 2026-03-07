@@ -454,7 +454,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     run.font.color.rgb = RGBColor(24, 64, 88)
     run.font.size = Pt(17)
     
-    surface_table = make_top_tight(doc.add_table(rows=1, cols=3))
+    surface_table = doc.add_table(rows=1, cols=3)
     surface_table.style = 'Table Grid'
     
     header_cells = surface_table.rows[0].cells
