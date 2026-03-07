@@ -328,7 +328,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     
     # Signature
     doc.add_paragraph()
-    make_tight(doc.add_paragraph("Sincerely,"))
+    doc.add_paragraph("Sincerely,")
     sig = make_tight(doc.add_paragraph())
     run = sig.add_run("Azeem Iqbal")
     run.bold = True
