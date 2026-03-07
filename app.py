@@ -177,7 +177,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     run = header.add_run("Mold Testing and Removal")
     run.bold = True
     run.font.size = Pt(24)
-    run.font.color.rgb = RGBColor(0, 119, 182)
+    run.font.color.rgb = RGBColor(24, 64, 88)
     
     contact = doc.add_paragraph()
     contact.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -192,7 +192,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     run = title.add_run("MOLD ASSESSMENT REPORT")
     run.bold = True
     run.font.size = Pt(28)
-    run.font.color.rgb = RGBColor(0, 119, 182)
+    run.font.color.rgb = RGBColor(24, 64, 88)
     
     doc.add_paragraph()
     
@@ -212,7 +212,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     info = doc.add_paragraph()
     run = info.add_run("Client & Property:\n")
     run.bold = True
-    run.font.color.rgb = RGBColor(0, 119, 182)
+    run.font.color.rgb = RGBColor(24, 64, 88)
     info.add_run(f"{data['client_name']}\n")
     info.add_run(f"{data['address']}\n")
     info.add_run(f"{data['city']}, {data['state']} {data['zip']}\n")
@@ -220,33 +220,22 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     info2 = doc.add_paragraph()
     run = info2.add_run("Assessment Date: ")
     run.bold = True
-    run.font.color.rgb = RGBColor(0, 119, 182)
+    run.font.color.rgb = RGBColor(24, 64, 88)
     info2.add_run(data['inspection_date'].strftime("%B %d, %Y"))
     
     info3 = doc.add_paragraph()
     run = info3.add_run("Report Date: ")
     run.bold = True
-    run.font.color.rgb = RGBColor(0, 119, 182)
+    run.font.color.rgb = RGBColor(24, 64, 88)
     info3.add_run(data['report_date'].strftime("%B %d, %Y"))
     
     info4 = doc.add_paragraph()
     run = info4.add_run("Samples Taken:\n")
     run.bold = True
-    run.font.color.rgb = RGBColor(0, 119, 182)
+    run.font.color.rgb = RGBColor(24, 64, 88)
     info4.add_run("Exterior control sample (outdoor air)\n")
     for i, sample in enumerate(data['samples'], 1):
         info4.add_run(f"Sample {i}: {sample['type']} taken at {sample['location']}\n")
-    
-    # License footer
-    doc.add_paragraph()
-    footer = doc.add_paragraph()
-    footer.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run = footer.add_run("State Licensed Mold Assessment Consultant\n")
-    run.font.size = Pt(9)
-    run.italic = True
-    run = footer.add_run("TDLR MAC #2189 (Exp. 10/24/2027)")
-    run.bold = True
-    run.font.size = Pt(9)
     
     # ===== PAGE 2: OFFICIAL LETTER =====
     doc.add_page_break()
@@ -339,7 +328,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     run = obs_title.add_run("Visual Observations & Moisture Readings")
     run.bold = True
     run.font.size = Pt(16)
-    run.font.color.rgb = RGBColor(0, 119, 182)
+    run.font.color.rgb = RGBColor(24, 64, 88)
     
     # Environmental conditions
     env_p = doc.add_paragraph()
@@ -383,7 +372,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     run = lab_title.add_run("Laboratory Results Analysis")
     run.bold = True
     run.font.size = Pt(16)
-    run.font.color.rgb = RGBColor(0, 119, 182)
+    run.font.color.rgb = RGBColor(24, 64, 88)
     
     doc.add_paragraph(
         "Samples were submitted to PRO-LAB (an accredited laboratory) for analysis. "
@@ -472,7 +461,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     run = conc_title.add_run("Conclusions")
     run.bold = True
     run.font.size = Pt(16)
-    run.font.color.rgb = RGBColor(0, 119, 182)
+    run.font.color.rgb = RGBColor(24, 64, 88)
     
     doc.add_paragraph("Based on the visual inspection, moisture readings, and laboratory results, the following conclusions are made:")
     
@@ -488,7 +477,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     run = rec_title.add_run("Recommendations")
     run.bold = True
     run.font.size = Pt(16)
-    run.font.color.rgb = RGBColor(0, 119, 182)
+    run.font.color.rgb = RGBColor(24, 64, 88)
     
     if lab_results['mold_present']:
         doc.add_paragraph("To return the property to a normal fungal ecology (Condition 1), the following remediation steps are recommended:")
@@ -532,7 +521,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     run = terms_title.add_run("Terms and Conditions")
     run.bold = True
     run.font.size = Pt(16)
-    run.font.color.rgb = RGBColor(0, 119, 182)
+    run.font.color.rgb = RGBColor(24, 64, 88)
     
     terms = [
         ("Inspection Limitation", "This inspection and the information set forth in the report is provided solely for the purpose of verifying that certain structural or physical characteristics exist at the Location Address listed. The undersigned and company representative does not make a health or safety certification or warranty, express or implied, of any kind."),
@@ -568,7 +557,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     footer.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = footer.add_run("Mold Testing and Removal\n")
     run.bold = True
-    run.font.color.rgb = RGBColor(0, 119, 182)
+    run.font.color.rgb = RGBColor(24, 64, 88)
     footer.add_run("2031 John West Rd, Suite 119 | Dallas, TX 75228\n")
     footer.add_run("(817) 718-5086 | Azeem@RestorationCleanupService.com")
     
