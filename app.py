@@ -160,6 +160,13 @@ def set_cell_shading(cell, color):
     shading_elm = parse_xml(f'<w:shd {nsdecls("w")} w:fill="{color}"/>')
     cell._tc.get_or_add_tcPr().append(shading_elm)
 
+def make_tight(para):
+    """Removes all padding and forced spacing from a paragraph."""
+    para.paragraph_format.space_before = Pt(0)
+    para.paragraph_format.space_after = Pt(0)
+    para.paragraph_format.line_spacing = 1.0
+    return para
+
 def create_report(data, photos, lab_pdf_bytes, lab_results):
     """Generate the Word document report"""
     doc = Document()
@@ -172,11 +179,8 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     
     # ===== PAGE 1: COVER PAGE =====
     # Company Header  
-    contact = doc.add_paragraph()
+    contact = make_tight(doc.add_paragraph())
     contact.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    contact.paragraph_format.space_before = Pt(0)
-    contact.paragraph_format.space_after = Pt(0)
-    contact.paragraph_format.line_spacing = 1.0  # Force single spacing
     contact.add_run("Mold Testing and Removal\n")
     contact.add_run("2031 John West Rd. #119\n")
     contact.add_run("Dallas, TX 75228\n")
@@ -184,19 +188,16 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     contact.add_run("help@moldtestingandremoval.com")
     
     # Title
-    doc.add_paragraph()
-    title = doc.add_paragraph()
+    make_tight(doc.add_paragraph())
+    title = make_tight(doc.add_paragraph())
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    title.paragraph_format.space_before = Pt(0)
-    title.paragraph_format.space_after = Pt(0)
-    title.paragraph_format.line_spacing = 1.0  # Force single spacing
     run = title.add_run("MOLD ASSESSMENT REPORT")
     run.font.name = 'Bebas Neue'
     run.bold = True
     run.font.size = Pt(30)
     run.font.color.rgb = RGBColor(24, 64, 88)
     
-    doc.add_paragraph()
+    make_tight(doc.add_paragraph())
     
     # Property Photo
     if photos.get('property'):
@@ -208,31 +209,35 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
         except:
             pass
     
-    doc.add_paragraph()
+    make_tight(doc.add_paragraph())
     
     # Client Info
-    info = doc.add_paragraph()
+    info = make_tight(doc.add_paragraph())
     run = info.add_run("Client & Property:\n")
+    run.font.name = 'Bebas Neue'
     run.bold = True
     run.font.color.rgb = RGBColor(24, 64, 88)
     info.add_run(f"{data['client_name']}\n")
     info.add_run(f"{data['address']}\n")
     info.add_run(f"{data['city']}, {data['state']} {data['zip']}\n")
     
-    info2 = doc.add_paragraph()
+    info2 = make_tight(doc.add_paragraph())
     run = info2.add_run("Assessment Date: ")
+    run.font.name = 'Bebas Neue'
     run.bold = True
     run.font.color.rgb = RGBColor(24, 64, 88)
     info2.add_run(data['inspection_date'].strftime("%B %d, %Y"))
     
-    info3 = doc.add_paragraph()
+    info3 = make_tight(doc.add_paragraph())
     run = info3.add_run("Report Date: ")
+    run.font.name = 'Bebas Neue'
     run.bold = True
     run.font.color.rgb = RGBColor(24, 64, 88)
     info3.add_run(data['report_date'].strftime("%B %d, %Y"))
     
-    info4 = doc.add_paragraph()
+    info4 = make_tight(doc.add_paragraph())
     run = info4.add_run("Samples Taken:\n")
+    run.font.name = 'Bebas Neue'
     run.bold = True
     run.font.color.rgb = RGBColor(24, 64, 88)
     info4.add_run("Exterior control sample (outdoor air)\n")
