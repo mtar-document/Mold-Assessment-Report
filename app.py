@@ -14,8 +14,8 @@ import os
 
 # Page config
 st.set_page_config(
-    page_title="Mold Report Generator - Mold Testing and Removal",
-    page_icon="🏠",
+    page_title="Mold Assessment Report Generator - Mold Testing and Removal",
+    page_icon="🦠",
     layout="wide"
 )
 
