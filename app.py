@@ -164,11 +164,13 @@ def make_tight(para):
     """Removes all padding and forced spacing from a paragraph."""
     para.paragraph_format.space_before = Pt(0)
     para.paragraph_format.space_after = Pt(0)
+    para.paragraph_format.line_spacing = 1.15
     return para
 
 def make_top_tight(para):
     """Removes ONLY BEFORE spacing from a paragraph."""
     para.paragraph_format.space_before = Pt(0)
+    para.paragraph_format.line_spacing = 1.15
     return para
 
 def create_report(data, photos, lab_pdf_bytes, lab_results):
