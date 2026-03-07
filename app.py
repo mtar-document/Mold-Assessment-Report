@@ -217,6 +217,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     run.font.name = 'Bebas Neue'
     run.bold = True
     run.font.color.rgb = RGBColor(24, 64, 88)
+    run.font.size = Pt(15)
     info.add_run(f"{data['client_name']}\n")
     info.add_run(f"{data['address']}\n")
     info.add_run(f"{data['city']}, {data['state']} {data['zip']}\n")
@@ -226,6 +227,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     run.font.name = 'Bebas Neue'
     run.bold = True
     run.font.color.rgb = RGBColor(24, 64, 88)
+    run.font.size = Pt(15)
     info2.add_run(data['inspection_date'].strftime("%B %d, %Y"))
     
     info3 = make_tight(doc.add_paragraph())
@@ -233,6 +235,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     run.font.name = 'Bebas Neue'
     run.bold = True
     run.font.color.rgb = RGBColor(24, 64, 88)
+    run.font.size = Pt(15)
     info3.add_run(data['report_date'].strftime("%B %d, %Y"))
     
     info4 = make_tight(doc.add_paragraph())
@@ -240,6 +243,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     run.font.name = 'Bebas Neue'
     run.bold = True
     run.font.color.rgb = RGBColor(24, 64, 88)
+    run.font.size = Pt(15)
     info4.add_run("Exterior control sample (outdoor air)\n")
     for i, sample in enumerate(data['samples'], 1):
         info4.add_run(f"Sample {i}: {sample['type']} taken at {sample['location']}\n")
