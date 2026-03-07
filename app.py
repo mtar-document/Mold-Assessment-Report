@@ -177,7 +177,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     contact.add_run("Mold Testing and Removal\n")
     contact.add_run("2031 John West Rd. #119\n")
     contact.add_run("Dallas, TX 75228\n")
-    contact.add_run("(817) 718-5086")
+    contact.add_run("(817) 718-5086\n")
     contact.add_run("help@moldtestingandremoval.com")
     
     # Title
@@ -185,8 +185,9 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     title = doc.add_paragraph()
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = title.add_run("MOLD ASSESSMENT REPORT")
+    run.font.name = 'Bebas Neue'
     run.bold = True
-    run.font.size = Pt(28)
+    run.font.size = Pt(30)
     run.font.color.rgb = RGBColor(24, 64, 88)
     
     doc.add_paragraph()
