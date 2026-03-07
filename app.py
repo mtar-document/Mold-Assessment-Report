@@ -167,6 +167,12 @@ def make_tight(para):
     para.paragraph_format.line_spacing = 1.0
     return para
 
+def make_top_tight(para)
+    """Removes ONLY BEFORE spacing from a paragraph."""
+    para.paragraph_format.space_before = Pt(0)
+    para.paragraph_format.line_spacing = 1.0
+    return para
+
 def create_report(data, photos, lab_pdf_bytes, lab_results):
     """Generate the Word document report"""
     doc = Document()
@@ -335,14 +341,15 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     # ===== PAGE 3: VISUAL OBSERVATIONS =====
     doc.add_page_break()
     
-    obs_title = doc.add_paragraph()
+    obs_title = make_tight(doc.add_paragraph())
     run = obs_title.add_run("Visual Observations & Moisture Readings")
+    run.font.name = 'Bebas Neue'
     run.bold = True
-    run.font.size = Pt(16)
     run.font.color.rgb = RGBColor(24, 64, 88)
+    run.font.size = Pt(17)
     
     # Environmental conditions
-    env_p = doc.add_paragraph()
+    env_p = make_top_tight(doc.add_paragraph())
     run = env_p.add_run("Environmental Conditions: ")
     run.bold = True
     env_p.add_run(f"The indoor relative humidity (rH) was recorded at ")
@@ -355,6 +362,16 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
         env_p.add_run("above the recommended range (30-50%) and conducive to microbial growth.")
     else:
         env_p.add_run("within the recommended range (30-50%).")
+
+    # Outdoor Control Sample placeholder
+    ocs_title = make_tight(doc.add_paragraph())
+    run = ocs_title.add_run("Outdoor Control Sample")
+    run.font.name = 'Bebas Neue'
+    run.bold = True
+    run.font.color.rgb = RGBColor(24, 64, 88)
+    run.font.size = Pt(17)
+    ocs_p = make_top_tight(doc.add_paragraph())
+    run = ocs_p.add_run("An air sample is taken outside to serve as a baseline for all other air samples to be compared against.")
     
     # Area observations with photos
     for area in data['affected_areas']:
