@@ -329,19 +329,14 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     # Signature
     doc.add_paragraph()
     make_tight(doc.add_paragraph("Sincerely,"))
-    # Signature picture 'azeem_signature.png'
-    try:
-        # We add it to a tight paragraph to prevent huge gaps
-        sig_para = make_tight(doc.add_paragraph())
-        run = sig_para.add_run()
-        run.add_picture('Signature.png')
-    except Exception as e:
-        # This keeps the app from crashing if the image file is missing
-        doc.add_paragraph("[Signature Image Not Found]")
     sig = make_tight(doc.add_paragraph())
     run = sig.add_run("Azeem Iqbal")
     run.bold = True
     run.font.size = Pt(12)
+    # Signature picture 'azeem_signature.png'
+    sig_para = make_tight(doc.add_paragraph())
+    run = sig_para.add_run()
+    run.add_picture('Signature.png', width=Inches(0.9))
     make_tight(doc.add_paragraph("State of Texas Licensed Mold Assessment Consultant"))
     make_tight(doc.add_paragraph("TDLR MAC #2189 (Exp. 10/24/2027)"))
     
