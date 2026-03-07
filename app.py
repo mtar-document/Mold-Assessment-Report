@@ -167,7 +167,7 @@ def make_tight(para):
     para.paragraph_format.line_spacing = 1.0
     return para
 
-def make_top_tight(para)
+def make_top_tight(para);
     """Removes ONLY BEFORE spacing from a paragraph."""
     para.paragraph_format.space_before = Pt(0)
     para.paragraph_format.line_spacing = 1.0
