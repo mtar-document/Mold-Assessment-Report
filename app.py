@@ -375,10 +375,13 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     
     # Area observations with photos
     for area in data['affected_areas']:
-        area_title = doc.add_paragraph()
+        doc.add_page_break()
+        area_title = make_tight(doc.add_paragraph())
         run = area_title.add_run(area['name'])
+        run.font.name = 'Bebas Neue'
         run.bold = True
-        run.font.size = Pt(12)
+        run.font.color.rgb = RGBColor(24, 64, 88)
+        run.font.size = Pt(17)
         
         doc.add_paragraph(area['description'])
         
@@ -398,20 +401,23 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     
     lab_title = doc.add_paragraph()
     run = lab_title.add_run("Laboratory Results Analysis")
+    run.font.name = 'Bebas Neue'
     run.bold = True
-    run.font.size = Pt(16)
     run.font.color.rgb = RGBColor(24, 64, 88)
+    run.font.size = Pt(17)
     
-    doc.add_paragraph(
+    make_top_tight(doc.add_paragraph(
         "Samples were submitted to PRO-LAB (an accredited laboratory) for analysis. "
         "The following summarizes the findings compared to the outdoor control sample."
-    )
+    ))
     
     # Air Sample Table
-    air_title = doc.add_paragraph()
+    air_title = make_tight(doc.add_paragraph())
     run = air_title.add_run("Air Sample Comparison (Bioaerosol)")
+    run.font.name = 'Bebas Neue'
     run.bold = True
-    run.font.size = Pt(12)
+    run.font.color.rgb = RGBColor(24, 64, 88)
+    run.font.size = Pt(17)
     
     air_table = doc.add_table(rows=1, cols=4)
     air_table.style = 'Table Grid'
@@ -443,10 +449,12 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     # Surface Sample Table
     surface_title = doc.add_paragraph()
     run = surface_title.add_run("Surface Sample Results (Swab)")
+    run.font.name = 'Bebas Neue'
     run.bold = True
-    run.font.size = Pt(12)
+    run.font.color.rgb = RGBColor(24, 64, 88)
+    run.font.size = Pt(17)
     
-    surface_table = doc.add_table(rows=1, cols=3)
+    surface_table = make_top_tight(doc.add_table(rows=1, cols=3))
     surface_table.style = 'Table Grid'
     
     header_cells = surface_table.rows[0].cells
@@ -471,8 +479,10 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     doc.add_paragraph()
     mold_title = doc.add_paragraph()
     run = mold_title.add_run("Mold Types Identified")
+    run.font.name = 'Bebas Neue'
     run.bold = True
-    run.font.size = Pt(12)
+    run.font.color.rgb = RGBColor(24, 64, 88)
+    run.font.size = Pt(17)
     
     for mold_type in data.get('mold_types_found', []):
         mold_p = doc.add_paragraph()
