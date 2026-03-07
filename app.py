@@ -254,7 +254,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     for i, sample in enumerate(data['samples'], 1):
         info4.add_run(f"Sample {i}: {sample['type']} taken at {sample['location']}\n")
     
-    # ===== PAGE 2: OFFICIAL LETTER =====
+    # ===== PAGE 2: OFFICIAL LETTER =====    
     doc.add_page_break()
     
     letter_header = doc.add_paragraph()
