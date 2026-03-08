@@ -174,22 +174,36 @@ def make_top_tight(para):
     return para
 
 def add_floating_image(paragraph, image_path, width, x_pos, y_pos):
-    """Adds an image to a paragraph with absolute positioning on the page."""
+    """Adds an image with absolute positioning by building a proper XML anchor."""
     run = paragraph.add_run()
     shape = run.add_picture(image_path, width=width)
-    
-    # This is the 'magic' XML that tells Word to make the image float
-    xml = shape._inline.getparent().getparent().getparent()
-    # We change 'inline' to 'anchor'
-    xml_str = shape._inline.xml.replace('wp:inline', 'wp:anchor')
-    new_xml = parse_xml(xml_str)
-    
-    # Set the absolute coordinates
-    # x_pos and y_pos should be in Inches
-    new_xml.xpath('//wp:positionH/wp:posOffset')[0].text = str(int(x_pos * 914400))
-    new_xml.xpath('//wp:positionV/wp:posOffset')[0].text = str(int(y_pos * 914400))
-    
-    shape._inline.getparent().replace(shape._inline, new_xml)
+    # 1. Get the 'inline' object and its internal graphic XML
+    inline = shape._inline
+    extent = inline.extent
+    graphic_xml = inline.graphic.xml
+    # 2. Convert Inches to EMUs (English Metric Units) for Word
+    x_emu = int(x_pos * 914400)
+    y_emu = int(y_pos * 914400)
+    # 3. Construct a complete 'anchor' XML string
+    # This includes all the tags that were missing before
+    anchor_xml = (
+        f'<wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+        f'relativeHeight="251658240" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1" '
+        f'{nsdecls("wp", "a", "pic", "r")}>'
+        f'<wp:simplePos x="0" y="0"/>'
+        f'<wp:positionH relativeFrom="page"><wp:posOffset>{x_emu}</wp:posOffset></wp:positionH>'
+        f'<wp:positionV relativeFrom="page"><wp:posOffset>{y_emu}</wp:posOffset></wp:positionV>'
+        f'<wp:extent cx="{extent.cx}" cy="{extent.cy}"/>'
+        f'<wp:effectExtent l="0" t="0" r="0" b="0"/>'
+        f'<wp:wrapNone/>'
+        f'<wp:docPr id="1" name="Logo"/>'
+        f'<wp:cNvGraphicFramePr><a:graphicFrameLocks noChangeAspect="1"/></wp:cNvGraphicFramePr>'
+        f'{graphic_xml}'
+        f'</wp:anchor>'
+    )
+    # 4. Parse the new XML and replace the inline version
+    anchor = parse_xml(anchor_xml)
+    inline.getparent().replace(inline, anchor)
 
 def create_report(data, photos, lab_pdf_bytes, lab_results):
     """Generate the Word document report"""
