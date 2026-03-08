@@ -6,7 +6,9 @@ from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.oxml.ns import nsdecls
+from docx.oxml.ns import qn
 from docx.oxml import parse_xml
+from docx.oxml import OxmlElement
 from io import BytesIO
 import fitz  # PyMuPDF for PDF reading and merging
 from PIL import Image
@@ -205,6 +207,19 @@ def add_floating_image(paragraph, image_path, width, x_pos, y_pos):
     anchor = parse_xml(anchor_xml)
     inline.getparent().replace(inline, anchor)
 
+def add_page_number(run):
+    """Inserts a dynamic page number field into a run."""
+    fldChar1 = OxmlElement('w:fldChar')
+    fldChar1.set(qn('w:fldCharType'), 'begin')
+    instrText = OxmlElement('w:instrText')
+    instrText.set(qn('xml:space'), 'preserve')
+    instrText.text = "PAGE"
+    fldChar2 = OxmlElement('w:fldChar')
+    fldChar2.set(qn('w:fldCharType'), 'end')
+    run._r.append(fldChar1)
+    run._r.append(instrText)
+    run._r.append(fldChar2)
+
 def create_report(data, photos, lab_pdf_bytes, lab_results):
     """Generate the Word document report"""
     doc = Document()
@@ -216,6 +231,15 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     font.size = Pt(11)
     
     # ===== PAGE 1: COVER PAGE =====
+    # Access the first section of the document
+    section = doc.sections[0]
+    footer = section.footer
+    # Create a paragraph in the footer and align it to the center
+    footer_para = footer.paragraphs[0]
+    footer_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    # Add the word "Page " and then the dynamic number
+    run = footer_para.add_run("Page ")
+    add_page_number(run)
     # Company Info
     contact = make_tight(doc.add_paragraph())
     add_floating_image(contact, 'MTAR_logo.png', width=Inches(2.92), x_pos=1.00, y_pos=0.75) # Company Logo
