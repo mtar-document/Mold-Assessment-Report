@@ -173,6 +173,24 @@ def make_top_tight(para):
     para.paragraph_format.line_spacing = 1.15
     return para
 
+def add_floating_image(paragraph, image_path, width, x_pos, y_pos):
+    """Adds an image to a paragraph with absolute positioning on the page."""
+    run = paragraph.add_run()
+    shape = run.add_picture(image_path, width=width)
+    
+    # This is the 'magic' XML that tells Word to make the image float
+    xml = shape._inline.getparent().getparent().getparent()
+    # We change 'inline' to 'anchor'
+    xml_str = shape._inline.xml.replace('wp:inline', 'wp:anchor')
+    new_xml = parse_xml(xml_str)
+    
+    # Set the absolute coordinates
+    # x_pos and y_pos should be in Inches
+    new_xml.xpath('//wp:positionH/wp:posOffset')[0].text = str(int(x_pos * 914400))
+    new_xml.xpath('//wp:positionV/wp:posOffset')[0].text = str(int(y_pos * 914400))
+    
+    shape._inline.getparent().replace(shape._inline, new_xml)
+
 def create_report(data, photos, lab_pdf_bytes, lab_results):
     """Generate the Word document report"""
     doc = Document()
@@ -184,7 +202,11 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     font.size = Pt(11)
     
     # ===== PAGE 1: COVER PAGE =====
-    # Company Header  
+    # Company Logo
+    logo_para = doc.add_paragraph()
+    add_floating_image(logo_para, 'MTAR_logo.png', width=Inches(2.92), x_pos=0.5, y_pos=0.5)
+
+    # Company Info
     contact = make_tight(doc.add_paragraph())
     contact.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     contact.add_run("Mold Testing and Removal\n")
