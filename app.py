@@ -218,7 +218,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     # ===== PAGE 1: COVER PAGE =====
     # Company Info
     contact = make_tight(doc.add_paragraph())
-    add_floating_image(contact, 'MTAR_logo.png', width=Inches(2.92), x_pos=4.00, y_pos=0.75) # Company Logo
+    add_floating_image(contact, 'MTAR_logo.png', width=Inches(2.92), x_pos=1.00, y_pos=0.75) # Company Logo
     contact.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     contact.add_run("Mold Testing and Removal\n")
     contact.add_run("2031 John West Rd. #119\n")
