@@ -216,12 +216,9 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     font.size = Pt(11)
     
     # ===== PAGE 1: COVER PAGE =====
-    # Company Logo
-    logo_para = doc.add_paragraph()
-    add_floating_image(logo_para, 'MTAR_logo.png', width=Inches(2.92), x_pos=0.5, y_pos=0.5)
-
     # Company Info
     contact = make_tight(doc.add_paragraph())
+    add_floating_image(contact, 'MTAR_logo.png', width=Inches(2.92), x_pos=0.5, y_pos=0.5) # Company Logo
     contact.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     contact.add_run("Mold Testing and Removal\n")
     contact.add_run("2031 John West Rd. #119\n")
