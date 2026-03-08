@@ -244,7 +244,7 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     section.different_first_page_header_footer = False
     footer = section.footer
     footer_para = make_tight(footer.paragraphs[0])
-    add_floating_image(footer_para, 'Azeem_TDLR_Signature.png', width=Inches(0.69), x_pos=7.75, y_pos=9)
+    add_floating_image(footer_para, 'Azeem_TDLR_Signature.png', width=Inches(0.69), x_pos=7.7, y_pos=5)
     footer_para.add_run()
     
     # Company Info
