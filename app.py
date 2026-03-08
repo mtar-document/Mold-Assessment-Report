@@ -213,11 +213,11 @@ def add_page_number(run):
     fldChar1.set(qn('w:fldCharType'), 'begin')
     instrText = OxmlElement('w:instrText')
     instrText.set(qn('xml:space'), 'preserve')
-    instrText.text = "PAGE"
+    #instrText.text = "PAGE"
     fldChar2 = OxmlElement('w:fldChar')
     fldChar2.set(qn('w:fldCharType'), 'end')
     run._r.append(fldChar1)
-    run._r.append(instrText)
+    #run._r.append(instrText)
     run._r.append(fldChar2)
 
 def create_report(data, photos, lab_pdf_bytes, lab_results):
