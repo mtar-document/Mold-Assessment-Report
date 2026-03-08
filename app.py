@@ -231,16 +231,21 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     font.size = Pt(11)
     
     # ===== PAGE 1: COVER PAGE =====
-    # Access the section and turn on the "Different First Page" switch
+    # Adding page numbers to document (excluding first page)
     section = doc.sections[0]
     section.different_first_page_header_footer = True
-    # Access the 'Default' footer (which now only applies to Page 2 onwards)
     footer = section.footer
     footer_para = footer.paragraphs[0]
     footer_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    # Add ONLY the dynamic number (removing the "Page " text)
     run = footer_para.add_run()
     add_page_number(run)
+    # Adding signature to all pages of document
+    section = doc.sections[0]
+    section.different_first_page_header_footer = False
+    footer = section.footer
+    footer_para = make_tight(footer.paragraphs[0])
+    add_floating_image(footer_para, 'Azeem_TDLR_Signature.png', width=Inches(0.69), x_pos=7.31, y_pos=9.75)
+    footer_para.add_run()
     
     # Company Info
     contact = make_tight(doc.add_paragraph())
