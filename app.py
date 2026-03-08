@@ -231,15 +231,17 @@ def create_report(data, photos, lab_pdf_bytes, lab_results):
     font.size = Pt(11)
     
     # ===== PAGE 1: COVER PAGE =====
-    # Access the first section of the document
+    # Access the section and turn on the "Different First Page" switch
     section = doc.sections[0]
+    section.different_first_page_header_footer = True
+    # Access the 'Default' footer (which now only applies to Page 2 onwards)
     footer = section.footer
-    # Create a paragraph in the footer and align it to the center
     footer_para = footer.paragraphs[0]
     footer_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    # Add the word "Page " and then the dynamic number
-    run = footer_para.add_run("Page ")
+    # Add ONLY the dynamic number (removing the "Page " text)
+    run = footer_para.add_run()
     add_page_number(run)
+    
     # Company Info
     contact = make_tight(doc.add_paragraph())
     add_floating_image(contact, 'MTAR_logo.png', width=Inches(2.92), x_pos=1.00, y_pos=0.75) # Company Logo
