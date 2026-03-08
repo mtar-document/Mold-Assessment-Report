@@ -188,7 +188,7 @@ def add_floating_image(paragraph, image_path, width, x_pos, y_pos):
     y_emu = int(y_pos * 914400)
     # 3. Construct a complete 'anchor' XML string
     # This includes all the tags that were missing before
-    anchor_xml = (
+    """anchor_xml = (
         f'<wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
         f'relativeHeight="251658240" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1" '
         f'{nsdecls("wp", "a", "pic", "r")}>'
@@ -200,6 +200,27 @@ def add_floating_image(paragraph, image_path, width, x_pos, y_pos):
         f'<wp:wrapNone/>'
         f'<wp:docPr id="1" name="Logo"/>'
         f'<wp:cNvGraphicFramePr><a:graphicFrameLocks noChangeAspect="1"/></wp:cNvGraphicFramePr>'
+        f'{graphic_xml}'
+        f'</wp:anchor>'
+    )"""
+    anchor_xml = (
+        f'<wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+        f'relativeHeight="251658240" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1" '
+        f'{nsdecls("wp", "a", "pic", "r")}>'
+        f'<wp:simplePos x="0" y="0"/>'
+        f'<wp:positionH relativeFrom="page">'
+        f'<wp:posOffset>{x_emu}</wp:posOffset>'
+        f'</wp:positionH>'
+        f'<wp:positionV relativeFrom="page">'
+        f'<wp:posOffset>{y_emu}</wp:posOffset>'
+        f'</wp:positionV>'
+        f'<wp:extent cx="{extent.cx}" cy="{extent.cy}"/>'
+        f'<wp:effectExtent l="0" t="0" r="0" b="0"/>'
+        f'<wp:wrapNone/>'
+        f'<wp:docPr id="1" name="FixedImage"/>'
+        f'<wp:cNvGraphicFramePr>'
+        f'<a:graphicFrameLocks noChangeAspect="1"/>'
+        f'</wp:cNvGraphicFramePr>'
         f'{graphic_xml}'
         f'</wp:anchor>'
     )
